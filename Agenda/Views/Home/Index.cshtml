@@ -1,0 +1,154 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div id='calendar'></div>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+
+            var calendarEl = document.getElementById('calendar');
+
+              var calendar = new FullCalendar.Calendar(calendarEl, {
+                  customButtons: {
+                    myCustomButton1: {
+                      text: 'Botão Um',
+                      hint: 'Tche',
+                      click: function() {
+                        alert('clicked the custom button!');
+                      }
+                    },
+                    myCustomButton2: {
+                      text: 'Botão Dois',
+                      click: function() {
+                        alert('clicked the custom button!');
+                      }
+                    }
+                  },
+                    headerToolbar: {
+                        left: 'prev,next today',
+                        //left: '',
+                        center: 'title',
+                        right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth',
+                    },
+                     // bootstrapFontAwesome: { redo: 'redo' }, 
+
+                    footerToolbar: {
+                        //left: '',
+                          center: 'myCustomButton1,myCustomButton2',
+                          //right: 'prev,next',
+                    },
+
+
+                    buttonText: {
+                        today:    'Hoje',
+                        week:     'Semana',
+                        month:    'Mês',
+                        day:      'Dia',
+                        list:     'Lista',
+                    },
+                    buttonIcons: {
+                        //prev: 'chevron-right',
+                        //next: 'chevron-right',
+                        //prevYear: 'chevrons-left', // double chevron
+                        //nextYear: 'chevrons-right' // double chevron
+                    },
+                    allDayText: 'Dia Todo',
+                    //allDaySlot: false,
+                    //themeSystem: 'bootstrap5',
+                    initialDate: '2023-01-12',
+                    navLinks: true, // can click day/week names to navigate views
+                    businessHours: true, // display business hours
+                    editable: true,
+                    selectable: true,
+                    dateClick: function(info) {
+                        alert('Clicked on: ' + info.dateStr);
+                        //alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
+                        //alert('Current view: ' + info.view.type);
+                        // change the day's background color just for fun
+                        info.dayEl.style.backgroundColor = 'red';
+                      },
+                      eventClick: function(info) {
+                          var eventObj = info.event;
+
+                          if (eventObj.url) {
+                            alert(
+                              'Clicked ' + eventObj.title + '.\n' +
+                              'Will open ' + eventObj.url + ' in a new tab'
+                            );
+
+                            window.open(eventObj.url);
+
+                            info.jsEvent.preventDefault(); // prevents browser from following link in current tab.
+                          } else {
+                            alert('Clicked ' + eventObj.title);
+                          }
+                        },
+                    
+                    events: [
+                    {
+                        title: 'Almoço de Negócios',
+                        start: '2023-01-03T13:00:00',
+                        constraint: 'businessHours',
+                        color: '#f3ff'
+                    },
+                    {
+                        title: 'Meeting',
+                        start: '2023-01-13T11:00:00',
+                        constraint: 'availableForMeeting', // defined below
+                        color: '#f3ff' //cor da bolinha
+                    },
+                    {
+                        title: 'Conference',
+                        start: '2023-01-18',
+                        end: '2023-01-20',
+                        color: '#f3ff' //cor da bolinha
+                    },
+                    {
+                        title: 'Party',
+                        start: '2023-01-29T20:00:00'
+                    },
+
+                    // areas where "Meeting" must be dropped
+                    {
+                        groupId: 'availableForMeeting',
+                        start: '2023-01-11T10:00:00',
+                        end: '2023-01-11T16:00:00',
+                        display: 'background'
+                    },
+                    {
+                        groupId: 'availableForMeeting',
+                        start: '2023-01-13T10:00:00',
+                        end: '2023-01-13T16:00:00',
+                        display: 'background'
+                    },
+
+                    // red areas where no events can be dropped
+                    {
+                        start: '2023-01-24',
+                        end: '2023-01-28',
+                        overlap: false,
+                        display: 'background',
+                        color: '#f3ff'
+                    },
+                    {
+                        start: '2023-01-06',
+                        end: '2023-01-08',
+                        overlap: false,
+                        display: 'background',
+                        color: '#ff9f89'
+                    }
+                    ],
+                    //eventDidMount: function(event, element, view) {
+                    //    console.log(view);
+                    //}
+                });
+
+            calendar.setOption('locale', 'pt-br');
+
+            calendar.render();
+        });
+    </script>
+}

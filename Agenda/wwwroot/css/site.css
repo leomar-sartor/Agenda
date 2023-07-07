@@ -1,0 +1,43 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+/* Calendar custom */
+.fc .fc-daygrid-event-harness {
+    border: 1px solid royalblue;
+    border-radius: 5px;
+    padding: 0px;
+    margin: 3px;
+}
+
+.fc .fc-daygrid-event {
+    margin-top: 0px;
+}
+
+.fc .fc-daygrid-event.fc-event-start {
+    margin-left: 0px;
+}
+
+.fc .fc-daygrid-event.fc-event-end {
+    margin-right: 0px;
+}
+
+
+
+
+

@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h3 class="display-4">UpComing Events</h3>
+    <p><a target="_blank" href="https://calendar.google.com/calendar/">Minha Agenda no Google</a></p>
+</div>
+
+
+@if (ViewBag.EventList != null){
+    <table>
+        <tr>
+            <th> Event Title</th>
+        </tr>
+        @foreach(var item in ViewBag.EventList)
+        {
+            <tr>
+                <td> @item </td>
+            </tr>
+        }
+    </table>
+}
+else{
+    <div>No Upcomming events</div>
+}
